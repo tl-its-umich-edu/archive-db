@@ -9,6 +9,9 @@ from sqlalchemy import create_engine
 logger = logging.getLogger(__name__)
 logging.basicConfig()
 
+
+# Settings and global variables
+
 # Load config file
 try:
     with open('config/env.json') as f:
@@ -16,20 +19,19 @@ try:
 except FileNotFoundError as fnfe:
     logger.error('No configuration file was found; add env.json to the config directory.')
 
-# Initialize settings and global variables
 logger.setLevel(ENV.get('LOG_LEVEL', 'DEBUG'))
 
 OUT_DIR = ENV.get('OUT_DIR', "data")
 
-db_params = ENV['MYSQL_DATABASE']
+DB_PARAMS = ENV['MYSQL_DATABASE']
 ENGINE = create_engine(
-    f"mysql://{db_params['USER']}" + 
-    f":{db_params['PASSWORD']}" + 
-    f"@{db_params['HOST']}:" + 
-    f"{db_params['PORT']}" + 
-    f"/{db_params['DATABASE']}?charset=utf8"
+    f"mysql://{DB_PARAMS['USER']}" + 
+    f":{DB_PARAMS['PASSWORD']}" + 
+    f"@{DB_PARAMS['HOST']}" + 
+    f":{DB_PARAMS['PORT']}" + 
+    f"/{DB_PARAMS['DATABASE']}?charset=utf8"
 )
-logger.info(f"Created engine for communicating with {db_params['DATABASE']} database")
+logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} database")
 
 
 # Function(s)
@@ -49,7 +51,9 @@ def write_tables_as_csvs(out_path):
 
 if __name__ == '__main__':
     current_str_time = datetime.now().isoformat()
-    archive_dir_name = f"archive-{ENV['MYSQL_DATABASE']['DATABASE']}-{current_str_time}"
+
+    archive_dir_name = f"archive-{DB_PARAMS['DATABASE']}@{DB_PARAMS['HOST']}-{current_str_time}"
     archive_path = f'{OUT_DIR}/{archive_dir_name}'
     os.mkdir(archive_path)
+
     write_tables_as_csvs(archive_path)
