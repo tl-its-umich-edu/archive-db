@@ -6,13 +6,12 @@ from datetime import datetime
 import pandas as pd
 from sqlalchemy import create_engine
 
-logger = logging.getLogger(__name__)
-logging.basicConfig()
-
 
 # Settings and global variables
 
-# Load config file
+logger = logging.getLogger(__name__)
+logging.basicConfig()
+
 try:
     with open('config/env.json') as f:
         ENV = json.load(f)
@@ -21,7 +20,7 @@ except FileNotFoundError as fnfe:
 
 logger.setLevel(ENV.get('LOG_LEVEL', 'DEBUG'))
 
-OUT_DIR = ENV.get('OUT_DIR', "data")
+OUT_DIR = ENV.get('OUT_DIR', 'data')
 
 DB_PARAMS = ENV['MYSQL_DATABASE']
 ENGINE = create_engine(
@@ -37,7 +36,7 @@ logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} data
 # Function(s)
 
 def write_tables_as_csvs(out_path):
-    table_names_series = pd.read_sql('SHOW TABLES', ENGINE).iloc[:, 0]
+    table_names_series = pd.read_sql('SHOW TABLES;', ENGINE).iloc[:, 0]
     logger.debug(table_names_series)
     for table_name in table_names_series.to_list():
         table_df = pd.read_sql(table_name, ENGINE)
