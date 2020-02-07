@@ -49,9 +49,9 @@ def write_tables_as_csvs(out_path):
 # Main Program
 
 if __name__ == '__main__':
-    current_str_time = datetime.now().isoformat()
+    current_str_time = datetime.now().isoformat(timespec='seconds')
 
-    archive_dir_name = f"archive-{DB_PARAMS['DATABASE']}@{DB_PARAMS['HOST']}-{current_str_time}"
+    archive_dir_name = f"archive-{DB_PARAMS['DATABASE']}-{current_str_time}"
     archive_path = f'{OUT_DIR}/{archive_dir_name}'
     os.mkdir(archive_path)
 
