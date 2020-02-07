@@ -1,6 +1,6 @@
 ## archive_db.py
 
-This small Python application allows the user to connect to a MySQL database and write the data from each table to a CSV file. The application writes all of the resulting files to an `archive` directory named using the database's name and host, as well as the date and time the application was run.
+This small Python application allows the user to connect to a MySQL database and write the data from each table to a CSV file. The application writes all of the resulting files to an `archive` directory named using the database's name, as well as the date and time the application was run.
 
 ### Installation
 
@@ -67,4 +67,4 @@ To the run the application, simply execute `archive_db.py` within the activated 
 python archive_db.py
 ```
 
-The CSV files, each named according to the table name, will be in an `archive-` subdirectory under `data`.
+The CSV files, each named according to the table name, will be in an `archive-` subdirectory under `data`. Archive directories are named according to the following scheme, with each element separated by a hyphen: "archive", the name of the database, and the local date and time (to second precision).
