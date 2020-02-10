@@ -1,5 +1,4 @@
 {
-    "LOGGING_LEVEL": "INFO",
     "MYSQL_DATABASE": {
         "DATABASE": "",
         "USER": "",
@@ -7,6 +6,7 @@
         "HOST": "",
         "PORT": 0
     },
-    "OUT_PATH": "data",
-    "SSL_CA_PATH": null
+    "SSL_CA_PATH": null,
+    "LOGGING_LEVEL": "INFO",
+    "OUT_PATH": "data"
 }
