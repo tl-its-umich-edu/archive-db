@@ -22,15 +22,19 @@ logger.setLevel(ENV.get('LOGGING_LEVEL', 'DEBUG'))
 logger.info("** archive-db.py **")
 
 OUT_PATH = ENV.get('OUT_PATH', 'data')
-
+SSL_CA_PATH = ENV.get('SSL_CA_PATH', None)
 DB_PARAMS = ENV['MYSQL_DATABASE']
-ENGINE = create_engine(
-    f"mysql://{DB_PARAMS['USER']}" + 
+
+conn_str = (
+    'mysql' + 
+    f"://{DB_PARAMS['USER']}" + 
     f":{DB_PARAMS['PASSWORD']}" + 
     f"@{DB_PARAMS['HOST']}" + 
     f":{DB_PARAMS['PORT']}" + 
     f"/{DB_PARAMS['DATABASE']}?charset=utf8"
 )
+
+ENGINE = create_engine(conn_str, connect_args={'ssl': {'ca': SSL_CA_PATH}}) if SSL_CA_PATH else create_engine(conn_str)
 logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} database")
 
 
