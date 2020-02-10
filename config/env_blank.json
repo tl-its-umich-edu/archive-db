@@ -1,0 +1,11 @@
+{
+    "LOGGING_LEVEL": "INFO",
+    "MYSQL_DATABASE": {
+        "DATABASE": "",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": 0
+    },
+    "OUT_PATH": "data"
+}
