@@ -7,5 +7,5 @@
         "HOST": "",
         "PORT": 0
     },
-    "OUT_DIR": "data"
+    "OUT_PATH": "data"
 }
