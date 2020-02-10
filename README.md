@@ -54,10 +54,8 @@ Copy and rename the file `env.json` using a text editor, file utility, or termin
 
 1. Next, add the desired settings for the application. 
     
-    1. Replace the provided `LOG_LEVEL` value with the minimum level for log messages you want to appear in output. `INFO` or `DEBUG` is recommended for most use cases; see Python's [logging](https://docs.python.org/3/library/logging.html) module.
-
+    1. Replace the provided `LOGGING_LEVEL` value with the minimum level for log messages you want to appear in output. `INFO` or `DEBUG` is recommended for most use cases; see Python's [logging](https://docs.python.org/3/library/logging.html) module.
     1. Under `MYSQL_DATABASE`, replace the empty strings and `0` with the parameters for the database you wish to connect to.
-
     1. If you would like files written elsewhere, replace the provided `OUT_PATH` with a relative or absolute path to a directory of your choice. Directories on the specified path that do not exist will be created by the application. If no value is provided for `OUT_PATH`, the application will default to the `data` directory included in the repository.
 
 
