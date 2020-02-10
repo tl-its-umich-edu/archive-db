@@ -34,7 +34,10 @@ conn_str = (
     f"/{DB_PARAMS['DATABASE']}?charset=utf8"
 )
 
-ENGINE = create_engine(conn_str, connect_args={'ssl': {'ca': SSL_CA_PATH}}) if SSL_CA_PATH else create_engine(conn_str)
+if SSL_CA_PATH:
+    ENGINE = create_engine(conn_str, connect_args={'ssl': {'ca': SSL_CA_PATH}})
+else:
+    ENGINE = create_engine(conn_str)
 logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} database")
 
 
