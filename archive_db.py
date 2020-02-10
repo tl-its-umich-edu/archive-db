@@ -22,8 +22,8 @@ logger.setLevel(ENV.get('LOGGING_LEVEL', 'DEBUG'))
 logger.info("** archive-db.py **")
 
 OUT_PATH = ENV.get('OUT_PATH', 'data')
-SSL_CA_PATH = ENV.get('SSL_CA_PATH', None)
 DB_PARAMS = ENV['MYSQL_DATABASE']
+SSL_CA_PATH = ENV.get('SSL_CA_PATH', None)
 
 conn_str = (
     'mysql' + 
