@@ -26,11 +26,11 @@ DB_PARAMS = ENV['MYSQL_DATABASE']
 SSL_CA_PATH = ENV.get('SSL_CA_PATH', None)
 
 conn_str = (
-    'mysql' + 
-    f"://{DB_PARAMS['USER']}" + 
-    f":{DB_PARAMS['PASSWORD']}" + 
-    f"@{DB_PARAMS['HOST']}" + 
-    f":{DB_PARAMS['PORT']}" + 
+    'mysql' +
+    f"://{DB_PARAMS['USER']}" +
+    f":{DB_PARAMS['PASSWORD']}" +
+    f"@{DB_PARAMS['HOST']}" +
+    f":{DB_PARAMS['PORT']}" +
     f"/{DB_PARAMS['DATABASE']}?charset=utf8"
 )
 
