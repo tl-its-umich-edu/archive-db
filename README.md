@@ -54,12 +54,10 @@ Copy and rename the file `env.json` using a text editor, file utility, or termin
 
 1. Next, add the desired settings for the application. 
     
-    1. Under `MYSQL_DATABASE`, replace the empty strings and `0` with the parameters for the database you wish to connect to.
-    2. If you need a CA certificate to connect to the database specified in the `MYSQL_DATABASE` object, replace the `null` value for `SSL_CA_PATH` with the absolute path to your certificate.
-    3. Replace the provided `LOGGING_LEVEL` value with the minimum level for log messages you want to appear in output. `INFO` or `DEBUG` is recommended for most use cases; see Python's [logging](https://docs.python.org/3/library/logging.html) module.
-    4. If you would like output files written somewhere specific, replace the provided `OUT_PATH` with a relative or absolute path to a directory of your choice. Directories on the specified path that do not exist will be created by the application. If no value is provided for `OUT_PATH`, the application will default to the `data` directory included in the repository.
-
-
+     1. Under `MYSQL_DATABASE`, replace the empty strings and `0` with the parameters for the database you wish to connect to.
+     2. If you need a CA certificate to connect to the database specified in the `MYSQL_DATABASE` object, replace the `null` value for `SSL_CA_PATH` with the absolute path to your certificate.
+     3. Replace the provided `LOGGING_LEVEL` value with the minimum level for log messages you want to appear in output. `INFO` or `DEBUG` is recommended for most use cases; see Python's [logging](https://docs.python.org/3/library/logging.html) module.
+     4. If you would like output files written somewhere specific, replace the provided `OUT_PATH` with a relative or absolute path to a directory of your choice. Directories on the specified path that do not exist will be created by the application. If no value is provided for `OUT_PATH`, the application will default to the `data` directory included in the repository.
 
 ### Usage
 
