@@ -15,10 +15,11 @@ logging.basicConfig()
 try:
     with open('config/env.json') as f:
         ENV = json.load(f)
-except FileNotFoundError as fnfe:
+except FileNotFoundError:
     logger.error('No configuration file was found; add env.json to the config directory.')
 
-logger.setLevel(ENV.get('LOG_LEVEL', 'DEBUG'))
+logger.setLevel(ENV.get('LOGGING_LEVEL', 'DEBUG'))
+logger.info("** archive-db.py **")
 
 OUT_DIR = ENV.get('OUT_DIR', 'data')
 
@@ -35,7 +36,7 @@ logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} data
 
 # Function(s)
 
-def write_tables_as_csvs(out_path):
+def write_tables_as_csvs(out_path: str) -> None: 
     table_names_series = pd.read_sql('SHOW TABLES;', ENGINE).iloc[:, 0]
     logger.debug(table_names_series)
     for table_name in table_names_series.to_list():
@@ -50,6 +51,12 @@ def write_tables_as_csvs(out_path):
 
 if __name__ == '__main__':
     current_str_time = datetime.now().isoformat(timespec='seconds')
+
+    if not os.path.isdir(OUT_DIR):
+        os.makedirs(OUT_DIR)
+        logger.info(f'Created OUT_DIR {OUT_DIR} (and intermediate directories) because it did not exist')
+    else:
+        logger.info(f'OUT_DIR {OUT_DIR} already exists')
 
     archive_dir_name = f"archive-{DB_PARAMS['DATABASE']}-{current_str_time}"
     archive_path = f'{OUT_DIR}/{archive_dir_name}'
