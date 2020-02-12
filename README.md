@@ -13,8 +13,8 @@ When the prerequisites are satisfied, perform the actions below in order.
 
 1. Clone the repository and navigate into it.
     ```
-    https://github.com/tl-its-umich-edu/archive-db.git   # HTTPS
-    git@github.com:tl-its-umich-edu/archive-db.git       # SSH
+    git clone https://github.com/tl-its-umich-edu/archive-db.git   # HTTPS
+    git clone git@github.com:tl-its-umich-edu/archive-db.git       # SSH
     
     cd archive-db
     ```
