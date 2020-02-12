@@ -1,5 +1,5 @@
 # standard libraries
-import json, logging, os, pathlib
+import json, logging, os
 from datetime import datetime
 
 # third-party libraries
