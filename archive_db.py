@@ -58,7 +58,7 @@ def write_tables_as_csvs(root_path: str) -> None:
 # Main Program
 
 if __name__ == '__main__':
-    current_str_time = datetime.now().isoformat(timespec='seconds')
+    current_str_time = datetime.now().strftime('%Y-%m-%dT%H-%M-%S')
 
     if not os.path.isdir(OUT_PATH):
         os.makedirs(OUT_PATH)
