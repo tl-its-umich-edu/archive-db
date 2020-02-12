@@ -22,21 +22,29 @@ logger.setLevel(ENV.get('LOGGING_LEVEL', 'DEBUG'))
 logger.info("** archive-db.py **")
 
 OUT_PATH = ENV.get('OUT_PATH', 'data')
-
 DB_PARAMS = ENV['MYSQL_DATABASE']
-ENGINE = create_engine(
-    f"mysql://{DB_PARAMS['USER']}" + 
-    f":{DB_PARAMS['PASSWORD']}" + 
-    f"@{DB_PARAMS['HOST']}" + 
-    f":{DB_PARAMS['PORT']}" + 
+SSL_CA_PATH = ENV.get('SSL_CA_PATH', None)
+
+conn_str = (
+    'mysql' +
+    f"://{DB_PARAMS['USER']}" +
+    f":{DB_PARAMS['PASSWORD']}" +
+    f"@{DB_PARAMS['HOST']}" +
+    f":{DB_PARAMS['PORT']}" +
     f"/{DB_PARAMS['DATABASE']}?charset=utf8"
 )
+
+if SSL_CA_PATH:
+    ENGINE = create_engine(conn_str, connect_args={'ssl': {'ca': SSL_CA_PATH}})
+else:
+    ENGINE = create_engine(conn_str)
 logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} database")
 
 
 # Function(s)
 
-def write_tables_as_csvs(root_path: str) -> None: 
+def write_tables_as_csvs(root_path: str) -> None:
+    logger.debug('Starting to execute queries against database...')
     table_names_series = pd.read_sql('SHOW TABLES;', ENGINE).iloc[:, 0]
     logger.debug(table_names_series)
     for table_name in table_names_series.to_list():
