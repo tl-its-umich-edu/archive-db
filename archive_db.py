@@ -1,5 +1,5 @@
 # standard libraries
-import json, logging, os
+import json, logging, os, pathlib
 from datetime import datetime
 
 # third-party libraries
@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig()
 
 try:
-    with open('config/env.json') as f:
+    with open(os.path.join('config', 'env.json')) as f:
         ENV = json.load(f)
 except FileNotFoundError:
     logger.error('No configuration file was found; add env.json to the config directory.')
@@ -50,7 +50,7 @@ def write_tables_as_csvs(root_path: str) -> None:
     for table_name in table_names_series.to_list():
         table_df = pd.read_sql(table_name, ENGINE)
         logger.debug(table_df.head())
-        csv_file_path = f'{root_path}/{table_name}.csv'
+        csv_file_path = os.path.join(root_path, f'{table_name}.csv')
         table_df.to_csv(csv_file_path, index=False)
         logger.info(f'Wrote {table_name} table to {csv_file_path}')
 
@@ -67,7 +67,7 @@ if __name__ == '__main__':
         logger.info(f'OUT_PATH {OUT_PATH} already exists')
 
     archive_dir_name = f"archive-{DB_PARAMS['DATABASE']}-{current_str_time}"
-    archive_path = f'{OUT_PATH}/{archive_dir_name}'
+    archive_path = os.path.join(OUT_PATH, archive_dir_name)
     os.mkdir(archive_path)
 
     write_tables_as_csvs(archive_path)
