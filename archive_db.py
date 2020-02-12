@@ -43,7 +43,8 @@ logger.info(f"Created engine for communicating with {DB_PARAMS['DATABASE']} data
 
 # Function(s)
 
-def write_tables_as_csvs(root_path: str) -> None: 
+def write_tables_as_csvs(root_path: str) -> None:
+    logger.debug('Starting to execute queries against database...')
     table_names_series = pd.read_sql('SHOW TABLES;', ENGINE).iloc[:, 0]
     logger.debug(table_names_series)
     for table_name in table_names_series.to_list():
